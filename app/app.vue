@@ -1,6 +1,7 @@
 <template>
   <UApp>
     <UMain>
+      <AppLoading v-if="isFirstLoading" />
       <NuxtLayout>
         <NuxtPage />
       </NuxtLayout>
@@ -9,6 +10,7 @@
 </template>
 
 <script setup>
+import { onNuxtReady } from "#app";
 useHead({
   meta: [{ name: "viewport", content: "width=device-width, initial-scale=1" }],
   link: [{ rel: "icon", href: "/favicon.ico" }],
@@ -30,4 +32,22 @@ useSeoMeta({
   twitterImage: "https://ui.nuxt.com/assets/templates/nuxt/starter-light.png",
   twitterCard: "summary_large_image",
 });
+
+// 控制首次加载状态的响应式变量，初始为 true，表示正在加载
+const isFirstLoading = ref(true);
+
+// 当 Nuxt 应用准备就绪后执行
+onNuxtReady(() => {
+  // 在下一帧动画时关闭加载状态，确保页面渲染完成
+  requestAnimationFrame(() => {
+    isFirstLoading.value = false;
+  });
+});
+
+// 兜底：3 秒后若仍未关闭加载状态，则强制关闭，防止无限加载
+setTimeout(() => {
+  if (isFirstLoading.value) {
+    isFirstLoading.value = false;
+  }
+}, 3000);
 </script>
