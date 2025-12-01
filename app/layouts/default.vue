@@ -1,9 +1,10 @@
 <template>
-  <Header />
+  <!-- <Header /> -->
   <!-- <UMain> -->
   <NuxtPage />
-  <!-- </UMain> -->
-  <Footer />
+
+  <!-- <Footer /> -->
+  <BackToTop />
 </template>
 
 <script setup></script>
