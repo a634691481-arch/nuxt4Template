@@ -4,7 +4,7 @@
       <template #default="{ item }">
         <div
           :class="[`aspect-[${item.ratio}]`]"
-          class="group relative w-full overflow-hidden bg-neutral-100 border border-neutral-200"
+          class="group relative w-full overflow-hidden bg-neutral-100"
           :style="{ aspectRatio: item.ratio }"
           @click="handleClick(item)"
         >
