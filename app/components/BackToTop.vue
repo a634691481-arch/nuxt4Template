@@ -10,8 +10,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from "vue";
-
 const visible = ref<boolean>(false);
 
 function onScroll(): void {

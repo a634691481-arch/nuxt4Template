@@ -29,19 +29,8 @@
 </template>
 
 <script setup>
-const toast = useToast();
-
-function showToast() {
-  toast.add({
-    title: "Success",
-    description: "Operation completed successfully",
-    icon: "i-heroicons-information-circle",
-    color: "primary",
-  });
-}
-
 const ratios = ["1/1", "4/3", "3/4", "16/9", "9/16", "3/2", "2/3"];
-function genItems(count = 24) {
+function genItems(count = 200) {
   return Array.from({ length: count }, () => {
     const ratio = ratios[Math.floor(Math.random() * ratios.length)];
     const id = Math.floor(Math.random() * 1000);
@@ -57,9 +46,9 @@ function genItems(count = 24) {
 }
 
 const items = ref(genItems());
-function refreshItems() {
-  items.value = genItems();
-}
+// function refreshItems() {
+//   items.value = genItems();
+// }
 </script>
 
 <style lang="scss" scoped>
