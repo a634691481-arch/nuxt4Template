@@ -16,7 +16,7 @@ importers:
         version: 1.2.77
       '@iconify-json/simple-icons':
         specifier: ^1.2.59
-        version: 1.2.60
+        version: 1.2.61
       '@nuxt/ui':
         specifier: ^4.2.1
         version: 4.2.1(@babel/parser@7.28.5)(change-case@5.4.4)(db0@0.3.4)(embla-carousel@8.6.0)(ioredis@5.8.2)(magicast@0.5.1)(typescript@5.9.3)(vite@7.2.6(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.1)(yaml@2.8.2))(vue-router@4.6.3(vue@3.5.25(typescript@5.9.3)))(vue@3.5.25(typescript@5.9.3))
@@ -623,11 +623,11 @@ packages:
   '@iconify-json/lucide@1.2.77':
     resolution: {integrity: sha512-FF3Z+np6Ksb0MaoQymhCHZ4xs5Oo8992Fw7By7bCgVCbBCClYV3wxpF8KzsI1FlxHD4ZXR42NVmXuqdW8YQGgA==}
 
-  '@iconify-json/simple-icons@1.2.60':
-    resolution: {integrity: sha512-KlwLBKCdMCqfySdkAA+jehdUx6VSjnj6lvzQKus7HjkPSQ6QP58d6xiptkIp0jd/Hw3PW2++nRuGvCvSYaF0Mg==}
+  '@iconify-json/simple-icons@1.2.61':
+    resolution: {integrity: sha512-DG6z3VEAxtDEw/SuZssZ/E8EvhjBhFQqxpEo3uckRKiia3LfZHmM4cx4RsaO2qX1Bqo9uadR5c/hYavvUQVuHw==}
 
-  '@iconify/collections@1.0.623':
-    resolution: {integrity: sha512-x2cpyLR5EO66ckbLUMOzwvrPNgANvbzLu4ky1tt5wi7CGMmA+RBl5udAdSohUkIZVR3NOeiJ7jK168s7j1g/ng==}
+  '@iconify/collections@1.0.624':
+    resolution: {integrity: sha512-xNhIO7CH4S85O7yp0zW+Sw5btqKXdBxPEKSk2ClCsmDTqA5OtS8eCIseQM4Jp7IS3d1mbO9KQV4Tx4nredaGxg==}
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
@@ -5674,11 +5674,11 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/simple-icons@1.2.60':
+  '@iconify-json/simple-icons@1.2.61':
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify/collections@1.0.623':
+  '@iconify/collections@1.0.624':
     dependencies:
       '@iconify/types': 2.0.0
 
@@ -6010,7 +6010,7 @@ snapshots:
 
   '@nuxt/icon@2.1.0(magicast@0.5.1)(vite@7.2.6(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.1)(yaml@2.8.2))(vue@3.5.25(typescript@5.9.3))':
     dependencies:
-      '@iconify/collections': 1.0.623
+      '@iconify/collections': 1.0.624
       '@iconify/types': 2.0.0
       '@iconify/utils': 3.1.0
       '@iconify/vue': 5.0.0(vue@3.5.25(typescript@5.9.3))
