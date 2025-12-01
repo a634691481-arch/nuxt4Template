@@ -1,32 +1,18 @@
 <template>
-  <!-- <div class="my-6">
-    <UButton
-      label="刷新瀑布流"
-      color="primary"
-      variant="solid"
-      @click="refreshItems"
-    />
-  </div> -->
   <div class="p-2">
-    <MasonryWall :items="items" :ssr-columns="1" :column-width="220" :gap="5">
+    <MasonryWall :items="items" :ssr-columns="1" :column-width="220" :gap="6">
       <template #default="{ item }">
         <div
-          class="group relative w-full h-full overflow-hidden bg-neutral-100 border border-neutral-200"
+          :class="[`aspect-[${item.ratio}]`]"
+          class="w-full overflow-hidden bg-neutral-100 border border-neutral-200"
+          :style="{ aspectRatio: item.ratio }"
         >
           <img
             :src="item.src"
-            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 z-0"
+            alt=""
+            class="w-full h-full object-cover"
             loading="lazy"
           />
-          <div
-            class="absolute inset-0 z-10 pointer-events-none bg-img opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-          ></div>
-          <div
-            class="absolute inset-x-0 bottom-0 z-20 p-3 text-white opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300"
-          >
-            <div class="text-sm font-semibold">{{ item.name }}</div>
-            <div class="text-xs">{{ formatDate(item.date) }}</div>
-          </div>
         </div>
       </template>
     </MasonryWall>
@@ -45,25 +31,20 @@ function showToast() {
   });
 }
 
+const ratios = ["1/1", "4/3", "3/4", "16/9", "9/16", "3/2", "2/3"];
 function genItems(count = 24) {
   return Array.from({ length: count }, () => {
+    const ratio = ratios[Math.floor(Math.random() * ratios.length)];
     const id = Math.floor(Math.random() * 1000);
-    const date = new Date(
-      Date.now() - Math.floor(Math.random() * 30 * 24 * 60 * 60 * 1000)
-    ).toISOString();
+    // 使用较大的图片，确保裁剪后清晰
     return {
       id,
+      ratio,
       src: `https://picsum.photos/id/${id}/1200/1200`,
-      name: `item-${id}`,
-      date,
+      date: new Date().toLocaleDateString(),
+      name: `Item ${id}`,
     };
   });
-}
-
-function formatDate(input) {
-  const d = new Date(input);
-  if (Number.isNaN(d.getTime())) return String(input ?? "");
-  return d.toLocaleString();
 }
 
 const items = ref(genItems());
@@ -72,14 +53,4 @@ function refreshItems() {
 }
 </script>
 
-<style lang="scss" scoped>
-// .bg-img {
-//   //bg-gradient-to-t from-black/70 via-black/30 to-transparent
-//   background: linear-gradient(
-//     to top,
-//     rgba(0, 0, 0, 0.7),
-//     rgba(0, 0, 0, 0.3),
-//     transparent
-//   );
-// }
-</style>
+<style lang="scss" scoped></style>
