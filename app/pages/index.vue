@@ -4,15 +4,24 @@
       <template #default="{ item }">
         <div
           :class="[`aspect-[${item.ratio}]`]"
-          class="w-full overflow-hidden bg-neutral-100 border border-neutral-200"
+          class="group relative w-full overflow-hidden bg-neutral-100 border border-neutral-200"
           :style="{ aspectRatio: item.ratio }"
         >
           <img
             :src="item.src"
             alt=""
-            class="w-full h-full object-cover"
+            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 z-0"
             loading="lazy"
           />
+          <div
+            class="absolute inset-0 z-10 pointer-events-none bg_img opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          ></div>
+          <div
+            class="absolute inset-x-0 bottom-0 z-20 p-3 text-white opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300"
+          >
+            <div class="text-sm font-semibold">{{ item.name }}</div>
+            <div class="text-xs">{{ item.date }}</div>
+          </div>
         </div>
       </template>
     </MasonryWall>
@@ -53,4 +62,12 @@ function refreshItems() {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.bg_img {
+  background-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.7),
+    rgba(0, 0, 0, 0.3)
+  );
+}
+</style>
