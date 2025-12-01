@@ -23,6 +23,9 @@ importers:
       '@nuxtjs/seo':
         specifier: ^3.2.2
         version: 3.2.2(@unhead/vue@2.0.19(vue@3.5.23(typescript@5.9.3)))(db0@0.3.4)(h3@1.15.4)(ioredis@5.8.2)(magicast@0.5.1)(rollup@4.52.5)(unhead@2.0.19)(unstorage@1.17.2(db0@0.3.4)(ioredis@5.8.2))(vite@7.2.1(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.0)(yaml@2.8.1))(vue@3.5.23(typescript@5.9.3))
+      '@yeger/vue-masonry-wall':
+        specifier: ^5.1.4
+        version: 5.1.4(vue@3.5.23(typescript@5.9.3))
       nuxt:
         specifier: ^4.2.1
         version: 4.2.1(@parcel/watcher@2.5.1)(@types/node@24.10.1)(@vue/compiler-sfc@3.5.23)(db0@0.3.4)(eslint@9.39.1(jiti@2.6.1))(ioredis@5.8.2)(lightningcss@1.30.2)(magicast@0.5.1)(optionator@0.9.4)(rollup@4.52.5)(terser@5.44.0)(typescript@5.9.3)(vite@7.2.1(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.0)(yaml@2.8.1))(vue-tsc@3.1.5(typescript@5.9.3))(yaml@2.8.1)
@@ -1941,6 +1944,20 @@ packages:
     resolution: {integrity: sha512-e89uuTLMh0U5cZ9iDpEI2senqPGfbPRTHM/0AaQkcxnpqjkZqDYP8rpfm7edOz8s+pOCOROEy1PIveSW8+fL5g==}
     peerDependencies:
       vue: ^3.5.0
+
+  '@yeger/debounce@2.0.17':
+    resolution: {integrity: sha512-wz9ARkGnY25yToyaZaCz887aRxsIg96uI/waBLkV/Qfh9/VHP+C6uAFpOg8FPba0KMS2QYo2dhCOqPvCoDigyA==}
+
+  '@yeger/vue-lib-adapter@2.0.16':
+    resolution: {integrity: sha512-fxD0xY5dOy5G/c59gQ/IMbZl1MWw8tPK+moJu2WiUqpFrRQBz2U8bx95k0VSFMZqBCTEhXXomCi93C7FVRQB6A==}
+
+  '@yeger/vue-masonry-wall-core@5.0.21':
+    resolution: {integrity: sha512-YX2kQaxjYk6hOxdS5EKeZRQJy5Dmx/F2S5883xMFSS6pePji5d+2U82jVdXEkWYisFjq+I5K+5xx/MSLgSt7Hw==}
+
+  '@yeger/vue-masonry-wall@5.1.4':
+    resolution: {integrity: sha512-13a6PihxVHTyYdQzJeFY9GNz1QdpvGxlGcPqPiG/AVVD6ccMqRsxjkRHB2Bmwzs5oBhFZmO/sx5s5hB9+L5iiw==}
+    peerDependencies:
+      vue: ^3.0.0
 
   abbrev@3.0.1:
     resolution: {integrity: sha512-AO2ac6pjRB3SJmGJo+v5/aK6Omggp6fsLrs6wN9bd35ulu4cCwaAU9+7ZhXjeqHVkaHThLuzH0nZr0YpCDhygg==}
@@ -7076,6 +7093,20 @@ snapshots:
 
   '@vueuse/shared@13.9.0(vue@3.5.23(typescript@5.9.3))':
     dependencies:
+      vue: 3.5.23(typescript@5.9.3)
+
+  '@yeger/debounce@2.0.17': {}
+
+  '@yeger/vue-lib-adapter@2.0.16': {}
+
+  '@yeger/vue-masonry-wall-core@5.0.21':
+    dependencies:
+      '@yeger/debounce': 2.0.17
+      '@yeger/vue-lib-adapter': 2.0.16
+
+  '@yeger/vue-masonry-wall@5.1.4(vue@3.5.23(typescript@5.9.3))':
+    dependencies:
+      '@yeger/vue-masonry-wall-core': 5.0.21
       vue: 3.5.23(typescript@5.9.3)
 
   abbrev@3.0.1: {}

@@ -26,20 +26,22 @@ export default defineNuxtConfig({
       },
     },
   },
-  app: {
-    head: {
-      title: "My Nuxt App",
-      htmlAttrs: {
-        lang: "en",
-      },
-    },
-  },
+  plugins: [{ src: "~/plugins/vue-masonry-wall.ts", mode: "client" }],
+
   ui: {
     fonts: false, // 禁用默认字体加载，使用自定义字体
     mdc: true, // 启用 Markdown 组件支持
     content: true, // 启用内容模块
     experimental: {
       componentDetection: true, // 开启实验性组件自动检测
+    },
+  },
+  app: {
+    head: {
+      title: "My Nuxt App",
+      htmlAttrs: {
+        lang: "en",
+      },
     },
   },
 });
