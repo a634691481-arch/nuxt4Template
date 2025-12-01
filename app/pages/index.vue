@@ -6,6 +6,7 @@
           :class="[`aspect-[${item.ratio}]`]"
           class="group relative w-full overflow-hidden bg-neutral-100 border border-neutral-200"
           :style="{ aspectRatio: item.ratio }"
+          @click="handleClick(item)"
         >
           <img
             :src="item.src"
@@ -29,6 +30,8 @@
 </template>
 
 <script setup>
+const toast = useToast();
+
 const ratios = ["1/1", "4/3", "3/4", "16/9", "9/16", "3/2", "2/3"];
 function genItems(count = 200) {
   return Array.from({ length: count }, () => {
@@ -46,9 +49,20 @@ function genItems(count = 200) {
 }
 
 const items = ref(genItems());
-// function refreshItems() {
-//   items.value = genItems();
-// }
+function refreshItems() {
+  items.value = genItems();
+}
+function handleClick(item) {
+  console.log(item);
+  //  提示用户点击了图片
+  toast.add({
+    title: `点击了图片 ${item.name}`,
+    description: `图片比例为 ${item.ratio}`,
+    color: "primary",
+  });
+  // 跳转到图片详情页
+  navigateTo(`/image-${item.id}`);
+}
 </script>
 
 <style lang="scss" scoped>
