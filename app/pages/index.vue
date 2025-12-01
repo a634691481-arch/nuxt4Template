@@ -15,7 +15,7 @@
             loading="lazy"
           />
           <div
-            class="absolute inset-0 z-10 pointer-events-none bg_img opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            class="absolute inset-0 z-10 pointer-events-none bg-img opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           ></div>
           <div
             class="absolute inset-x-0 bottom-0 z-20 p-3 text-white opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300"
@@ -66,7 +66,7 @@ function handleClick(item) {
 </script>
 
 <style lang="scss" scoped>
-.bg_img {
+.bg-img {
   background-image: linear-gradient(
     to top,
     rgba(0, 0, 0, 0.7),
