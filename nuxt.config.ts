@@ -26,7 +26,7 @@ export default defineNuxtConfig({
       },
     },
   },
-  plugins: [{ src: "~/plugins/vue-masonry-wall.ts", mode: "client" }],
+  plugins: [{ src: "~/plugins/vue-masonry-wall.ts" }],
 
   ui: {
     fonts: false, // 禁用默认字体加载，使用自定义字体
