@@ -2,7 +2,7 @@
   <div class="p-2">
     <!--  -->
     <MasonryWall :items="items" :column-width="220" :gap="6" :ssr-columns="1">
-      <template #default="{ item = {} }">
+      <template #default="{ item }">
         <div
           :class="[`aspect-[${item.ratio}]`]"
           class="group relative w-full overflow-hidden bg-neutral-100"
@@ -65,7 +65,7 @@ function handleClick(item) {
 }
 </script>
 
-<!-- <style lang="scss" scoped>
+<style lang="scss" scoped>
 .bg-img {
   background-image: linear-gradient(
     to top,
@@ -73,4 +73,4 @@ function handleClick(item) {
     rgba(0, 0, 0, 0.3)
   );
 }
-</style> -->
+</style>
