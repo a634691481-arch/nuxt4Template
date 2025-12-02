@@ -1,6 +1,7 @@
 <template>
   <UApp>
     <UMain>
+      <!-- <UBanner id="welcome" title="欢迎来到我们的应用！" close /> -->
       <AppLoading v-if="isFirstLoading" />
       <NuxtLayout>
         <NuxtPage />

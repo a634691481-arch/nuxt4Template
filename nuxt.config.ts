@@ -1,6 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ["@nuxt/eslint", "@nuxt/ui", "@formkit/auto-animate", "@nuxtjs/seo"],
+  modules: [
+    "@nuxt/eslint",
+    "@nuxt/ui",
+    "@formkit/auto-animate",
+    "@nuxtjs/seo",
+    "motion-v/nuxt",
+  ],
 
   devtools: {
     enabled: true,
