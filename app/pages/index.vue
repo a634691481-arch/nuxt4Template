@@ -59,9 +59,7 @@ function genItems(count = 200) {
   });
 }
 const items = ref(genItems());
-function refreshItems() {
-  items.value = genItems();
-}
+
 function handleClick(item) {
   console.log(item);
   //  提示用户点击了图片

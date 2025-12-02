@@ -17,9 +17,15 @@
     <div class="flex items-center gap-1 text-neutral-700 dark:text-neutral-200">
       <UTooltip text="筛选">
         <UDropdownMenu
+          v-model:open="dropdownOpen"
           :items="filterItems"
           :ui="{
             content: 'w-50',
+          }"
+          :content="{
+            align: 'start',
+            side: 'bottom',
+            sideOffset: 8,
           }"
         >
           <UButton
@@ -38,13 +44,13 @@
           @click="refreshItems"
         />
       </UTooltip>
-      <UTooltip text="搜索">
+      <!-- <UTooltip text="搜索">
         <UButton
           color="neutral"
           variant="ghost"
           icon="i-heroicons-magnifying-glass-20-solid"
         />
-      </UTooltip>
+      </UTooltip> -->
       <UTooltip text="明暗切换">
         <UButton
           color="neutral"
@@ -61,11 +67,17 @@
 
 <script setup>
 import { ref } from "vue";
+const emit = defineEmits(["changeFilter", "resetFilter"]);
 const props = defineProps({
   user: {
     type: Object,
     default: {},
   },
+});
+onMounted(() => {
+  const saved = localStorage.getItem("theme");
+  const prefers = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  applyTheme(saved ? saved : prefers ? "dark" : "light");
 });
 
 const isDark = ref(false);
@@ -80,12 +92,7 @@ function toggleTheme() {
   applyTheme(isDark.value ? "light" : "dark");
 }
 
-onMounted(() => {
-  const saved = localStorage.getItem("theme");
-  const prefers = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  applyTheme(saved ? saved : prefers ? "dark" : "light");
-});
-
+const dropdownOpen = ref(false);
 const filterItems = ref([
   [
     {
@@ -98,18 +105,30 @@ const filterItems = ref([
     {
       label: "日期(最新的在前)",
       icon: "i-heroicons-calendar-days-20-solid",
+      onSelect: () => {
+        console.log("日期(最新的在前)");
+      },
     },
     {
       label: "日期(最旧的在前)",
       icon: "i-heroicons-calendar-days-20-solid",
+      onSelect: () => {
+        console.log("日期(最旧的在前)");
+      },
     },
     {
       label: "文件大小(升序)",
       icon: "i-heroicons-bars-arrow-up-20-solid",
+      onSelect: () => {
+        console.log("文件大小(升序)");
+      },
     },
     {
       label: "文件大小(降序)",
       icon: "i-heroicons-bars-arrow-down-20-solid",
+      onSelect: () => {
+        console.log("文件大小(降序)");
+      },
     },
   ],
   [
@@ -119,6 +138,7 @@ const filterItems = ref([
     },
   ],
 ]);
+function refreshItems() {}
 </script>
 
 <style lang="scss" scoped></style>
