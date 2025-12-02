@@ -1,15 +1,10 @@
 <template>
   <div class="p-2">
     <!--  -->
-    <MasonryWall
-      :items="items"
-      :column-width="220"
-      :gap="6"
-      :ssr-columns="1"
-      @click="handleClick(item)"
-    >
+    <MasonryWall :items="items" :column-width="220" :gap="6" :ssr-columns="1">
       <template #default="{ item = {} }">
         <div
+          @click="handleClick(item)"
           :class="[`aspect-[${item.ratio}]`]"
           class="group relative w-full overflow-hidden bg-neutral-100"
           :style="{ aspectRatio: item.ratio }"
