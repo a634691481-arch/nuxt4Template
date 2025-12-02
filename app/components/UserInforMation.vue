@@ -23,9 +23,8 @@
             content: 'w-50',
           }"
           :content="{
-            align: 'start',
+            align: 'center',
             side: 'bottom',
-            sideOffset: 8,
           }"
         >
           <UButton

@@ -7,9 +7,10 @@
           <UserInforMation :user="user"></UserInforMation>
         </div>
         <motion.div
-          :initial="{ opacity: 0, scale: 0.9, blur: 10 }"
-          :animate="{ opacity: 1, scale: 1, blur: 0 }"
+          :initial="{ opacity: 0, scale: 0.9 }"
+          :animate="{ opacity: 1, scale: 1 }"
           :transition="{ duration: 0.5, delay: x.index * 0.04 }"
+          :whileInView="{ opacity: 1, y: 5 }"
         >
           <div
             :class="[`aspect-[${x?.item?.ratio}]`]"
@@ -44,7 +45,7 @@ import { motion } from "motion-v";
 const toast = useToast();
 
 const ratios = ["1/1", "4/3", "3/4", "16/9", "9/16", "3/2", "2/3"];
-function genItems(count = 200) {
+function genItems(count = 40) {
   return Array.from({ length: count }, (_, index) => {
     const ratio =
       index === 0 ? "16/9" : ratios[Math.floor(Math.random() * ratios.length)];

@@ -1,14 +1,27 @@
 <template>
-  <div v-show="visible" class="fixed bottom-6 right-6 z-50">
-    <UButton
-      size="lg"
-      color="primary"
-      icon="i-heroicons-arrow-up"
-      @click="toTop"
-    />
-  </div>
+  <AnimatePresence :initial="false">
+    <motion.div
+      v-if="visible"
+      class="fixed bottom-6 right-6 z-50 cursor-pointer"
+      :initial="{ opacity: 0, scale: 0 }"
+      :animate="{ opacity: 1, scale: 1, rotate: 360 }"
+      :exit="{ opacity: 0, scale: 0, rotate: 360 }"
+      :transition="{ duration: 1 }"
+      :whileHover="{ scale: 1.1 }"
+      :whilePress="{ scale: 0.9 }"
+    >
+      <UButton
+        size="lg"
+        color="primary"
+        icon="i-heroicons-arrow-up"
+        @click="toTop"
+      />
+    </motion.div>
+  </AnimatePresence>
 </template>
 <script setup lang="ts">
+import { motion } from "motion-v";
+
 import { ref, onMounted, onBeforeUnmount } from "vue";
 
 const visible = ref<boolean>(false);
