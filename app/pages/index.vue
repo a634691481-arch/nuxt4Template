@@ -1,12 +1,18 @@
 <template>
   <div class="p-2">
-    <MasonryWall :items="items" :ssr-columns="1" :column-width="220" :gap="6">
-      <template #default="{ item }">
+    <!--  -->
+    <MasonryWall
+      :items="items"
+      :column-width="220"
+      :gap="6"
+      :ssr-columns="1"
+      @click="handleClick(item)"
+    >
+      <template #default="{ item = {} }">
         <div
           :class="[`aspect-[${item.ratio}]`]"
           class="group relative w-full overflow-hidden bg-neutral-100"
           :style="{ aspectRatio: item.ratio }"
-          @click="handleClick(item)"
         >
           <img
             :src="item.src"
@@ -65,7 +71,7 @@ function handleClick(item) {
 }
 </script>
 
-<style lang="scss" scoped>
+<!-- <style lang="scss" scoped>
 .bg-img {
   background-image: linear-gradient(
     to top,
@@ -73,4 +79,4 @@ function handleClick(item) {
     rgba(0, 0, 0, 0.3)
   );
 }
-</style>
+</style> -->
