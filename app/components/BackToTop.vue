@@ -20,8 +20,6 @@
   </AnimatePresence>
 </template>
 <script setup lang="ts">
-import { motion } from "motion-v";
-
 import { ref, onMounted, onBeforeUnmount } from "vue";
 
 const visible = ref<boolean>(false);
