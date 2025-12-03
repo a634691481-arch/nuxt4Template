@@ -111,23 +111,27 @@
 </template>
 
 <script setup>
-const fileInput = ref();
-const items = ref([]);
-const uploading = ref(false);
-const progress = ref(0);
+const fileInput = ref(); // 文件选择 input 元素
+const items = ref([]); // 已选图片列表
+const uploading = ref(false); // 是否正在上传
+const progress = ref(0); // 上传进度
 
+// 打开系统文件选择器，触发隐藏的 input
 function pickFiles() {
   fileInput.value?.click();
 }
+// 处理 input[file] 选择事件：加入文件并重置 input 值
 function onSelectFiles(e) {
   const files = Array.from(e.target.files || []);
   addFiles(files);
   e.target.value = null;
 }
+// 处理拖拽上传事件：加入拖拽的文件
 function onDrop(e) {
   const files = Array.from(e.dataTransfer?.files || []);
   addFiles(files);
 }
+// 将传入文件中过滤图片，生成预览数据并追加
 function addFiles(files) {
   const imgs = files
     .filter((f) => f.type.startsWith("image/"))
@@ -140,6 +144,7 @@ function addFiles(files) {
     }));
   items.value = [...items.value, ...imgs];
 }
+// 撤销预览并从列表移除指定图片
 function removeFile(id) {
   const idx = items.value.findIndex((i) => i.id === id);
   if (idx > -1) {
@@ -147,10 +152,12 @@ function removeFile(id) {
     items.value.splice(idx, 1);
   }
 }
+// 撤销所有预览 URL 并清空已选列表
 function clearFiles() {
   items.value.forEach((i) => URL.revokeObjectURL(i.url));
   items.value = [];
 }
+// 模拟上传进度，完成后提示并清空列表
 function simulateUpload() {
   uploading.value = true;
   progress.value = 0;
@@ -169,6 +176,7 @@ function simulateUpload() {
   }, 100);
 }
 
+// 图片查看器配置
 const viewerOptions = {
   toolbar: true,
   navbar: true,
@@ -176,13 +184,16 @@ const viewerOptions = {
   zoomable: true,
 };
 
+// 组件卸载前，撤销所有对象 URL，避免内存泄露
 onBeforeUnmount(() => {
   items.value.forEach((i) => URL.revokeObjectURL(i.url));
 });
 
+// 返回首页
 function goHome() {
   navigateTo("/");
 }
+// 清空已选图片（调用 clearFiles）
 function clearItems() {
   clearFiles();
 }
