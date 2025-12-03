@@ -38,7 +38,10 @@ export default defineNuxtConfig({
       },
     },
   },
-  plugins: [{ src: "~/plugins/vue-masonry-wall.ts" }],
+  plugins: [
+    { src: "~/plugins/vue-masonry-wall.ts" },
+    { src: "~/plugins/viewer.client.ts", mode: "client" },
+  ],
 
   ui: {
     fonts: false, // 禁用默认字体加载，使用自定义字体

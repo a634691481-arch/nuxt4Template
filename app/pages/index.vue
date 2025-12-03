@@ -1,17 +1,16 @@
 <template>
-  <div class="p-1">
+  <div class="p-1" v-viewer="viewerOptions">
     <!--  -->
     <MasonryWall :items="items" :column-width="280" :gap="5" :ssr-columns="1">
       <template #default="x">
         <div v-if="x.index == 0" class="absolute inset-0 z-40 bg-gray-700">
           <UserInforMation :user="user"></UserInforMation>
         </div>
-        <!-- <AnimatePresence :initial="false"> -->
         <motion.div
           :initial="{ opacity: 0, y: 500 }"
           :animate="{ opacity: 1, y: 0 }"
           :transition="{ delay: x.index * 0.1 }"
-          class="border-2 rounded-md overflow-hidden"
+          class="rounded-md overflow-hidden border border-neutral-200 dark:border-neutral-800"
           :whileInView="{ opacity: 1, y: 0 }"
           :exit="{ opacity: 0, y: 500 }"
         >
@@ -22,8 +21,8 @@
           >
             <img
               :src="x?.item?.src"
-              alt=""
-              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 z-0"
+              alt="图片"
+              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 z-0 cursor-pointer"
               loading="lazy"
             />
             <div
@@ -65,21 +64,19 @@ function genItems(count = 40) {
 }
 const items = ref(genItems());
 
-function handleClick(item) {
-  console.log(item);
-  //  提示用户点击了图片
-  // toast.add({
-  //   title: `点击了图片 ${item.name}`,
-  //   description: `图片比例为 ${item.ratio}`,
-  //   color: "primary",
-  // });
-  // // 跳转到图片详情页
-  // navigateTo(`/image-${item.id}`);
-}
-
 const user = {
   name: "Yangliu",
   avatar: `https://i.pravatar.cc/64?u=${Math.floor(Math.random() * 10000)}`,
+};
+
+const viewerOptions = {
+  toolbar: true,
+  navbar: true,
+  title: false,
+  movable: true,
+  zoomable: true,
+  rotatable: true,
+  transition: true,
 };
 </script>
 

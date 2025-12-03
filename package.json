@@ -18,7 +18,9 @@
     "@nuxtjs/seo": "^3.2.2",
     "@yeger/vue-masonry-wall": "^5.1.4",
     "motion-v": "^1.7.4",
-    "nuxt": "^4.2.1"
+    "nuxt": "^4.2.1",
+    "v-viewer": "^3.0.22",
+    "viewerjs": "^1.11.7"
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.10.0",
