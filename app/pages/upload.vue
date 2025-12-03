@@ -24,6 +24,7 @@
           </div>
         </div>
         <div class="flex items-center gap-2">
+          <!-- -->
           <UButton
             color="neutral"
             variant="ghost"
@@ -31,6 +32,7 @@
             :disabled="items.length === 0"
             @click="clearFiles"
           />
+
           <UButton
             color="primary"
             icon="i-heroicons-cloud-arrow-up-20-solid"
@@ -75,29 +77,31 @@
       </div>
 
       <div v-if="items.length" class="mt-6">
-        <div
-          class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3"
-          v-viewer="viewerOptions"
-        >
+        <div class="max-h-[60vh] overflow-y-auto custom-scrollbar pr-1">
           <div
-            v-for="it in items"
-            :key="it.id"
-            class="relative overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-800"
+            class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3"
+            v-viewer="viewerOptions"
           >
-            <img :src="it.url" alt="" class="w-full h-40 object-cover" />
             <div
-              class="absolute inset-x-0 bottom-0 p-2 text-white text-xs bg-gradient-to-t from-black/70 to-transparent"
+              v-for="it in items"
+              :key="it.id"
+              class="relative overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-800"
             >
-              <div class="truncate">{{ it.name }}</div>
-            </div>
-            <div class="absolute top-2 right-2">
-              <UButton
-                size="xs"
-                color="neutral"
-                variant="soft"
-                icon="i-heroicons-x-mark-20-solid"
-                @click="removeFile(it.id)"
-              />
+              <img :src="it.url" alt="" class="w-full h-40 object-cover" />
+              <div
+                class="absolute inset-x-0 bottom-0 p-2 text-white text-xs bg-gradient-to-t from-black/70 to-transparent"
+              >
+                <div class="truncate">{{ it.name }}</div>
+              </div>
+              <div class="absolute top-2 right-2">
+                <UButton
+                  size="xs"
+                  color="neutral"
+                  variant="soft"
+                  icon="i-heroicons-x-mark-20-solid"
+                  @click="removeFile(it.id)"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -178,6 +182,9 @@ onBeforeUnmount(() => {
 
 function goHome() {
   navigateTo("/");
+}
+function clearItems() {
+  clearFiles();
 }
 </script>
 
