@@ -6,11 +6,14 @@
         <div v-if="x.index == 0" class="absolute inset-0 z-40 bg-gray-700">
           <UserInforMation :user="user"></UserInforMation>
         </div>
+        <!-- <AnimatePresence :initial="false"> -->
         <motion.div
-          :initial="{ opacity: 0, scale: 0.9 }"
-          :animate="{ opacity: 1, scale: 1 }"
-          :transition="{ duration: 0.5, delay: x.index * 0.04 }"
-          :whileInView="{ opacity: 1, y: 5 }"
+          :initial="{ opacity: 0, y: 500 }"
+          :animate="{ opacity: 1, y: 0 }"
+          :transition="{ delay: x.index * 0.1 }"
+          class="border-2 rounded-md overflow-hidden"
+          :whileInView="{ opacity: 1, y: 0 }"
+          :exit="{ opacity: 0, y: 500 }"
         >
           <div
             :class="[`aspect-[${x?.item?.ratio}]`]"
@@ -34,13 +37,14 @@
             </div>
           </div>
         </motion.div>
+        <!-- </AnimatePresence> -->
       </template>
     </MasonryWall>
   </div>
 </template>
 
 <script setup>
-import { motion } from "motion-v";
+import { motion, scale } from "motion-v";
 
 const toast = useToast();
 
