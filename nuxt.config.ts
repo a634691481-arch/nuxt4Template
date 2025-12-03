@@ -40,7 +40,7 @@ export default defineNuxtConfig({
   },
   plugins: [
     { src: "~/plugins/vue-masonry-wall.ts" },
-    { src: "~/plugins/viewer.client.ts", mode: "client" },
+    { src: "~/plugins/viewer.ts" },
   ],
 
   ui: {

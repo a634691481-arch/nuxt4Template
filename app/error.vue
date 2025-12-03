@@ -2,16 +2,17 @@
   <UError
     :error="{
       statusCode: 404,
-      statusMessage: 'Page not found',
-      message: 'The page you are looking for does not exist.',
+      statusMessage: '页面未找到',
+      message: '你访问的页面不存在或已被移除',
     }"
     :clear="{
       color: 'neutral',
       size: 'lg',
       icon: 'i-lucide-arrow-left',
       class: 'rounded-full',
+      label: '返回首页',
     }"
-    redirect="/docs/getting-started"
+    redirect="/"
   />
 </template>
 

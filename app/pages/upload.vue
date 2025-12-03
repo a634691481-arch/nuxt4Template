@@ -1,6 +1,6 @@
 <template>
   <div
-    class="min-h-[80vh] p-6 grid place-items-center bg-gradient-to-b from-white to-neutral-100 dark:from-neutral-950 dark:to-neutral-900"
+    class="h-screen p-6 grid place-items-center bg-gradient-to-b from-white to-neutral-100 dark:from-neutral-950 dark:to-neutral-900"
   >
     <div class="fixed top-4 left-4 z-50">
       <UButton

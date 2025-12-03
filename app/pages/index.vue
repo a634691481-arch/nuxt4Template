@@ -1,4 +1,5 @@
 <template>
+  <!-- <client-only> -->
   <div class="p-1" v-viewer="viewerOptions">
     <!--  -->
     <MasonryWall :items="items" :column-width="280" :gap="5" :ssr-columns="1">
@@ -9,8 +10,8 @@
         <motion.div
           :initial="{ opacity: 0, y: 500 }"
           :animate="{ opacity: 1, y: 0 }"
-          :transition="{ delay: x.index * 0.1 }"
-          class="rounded-md overflow-hidden border border-neutral-200 dark:border-neutral-800"
+          :transition="{ delay: x.index ? x.index * 0.1 : 0 }"
+          class="rounded-md overflow-hidden border-2 border-neutral-200 dark:border-neutral-800"
           :whileInView="{ opacity: 1, y: 0 }"
           :exit="{ opacity: 0, y: 500 }"
         >
@@ -40,6 +41,7 @@
       </template>
     </MasonryWall>
   </div>
+  <!-- </client-only> -->
 </template>
 
 <script setup>
