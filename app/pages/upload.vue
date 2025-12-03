@@ -1,6 +1,6 @@
 <template>
   <div
-    class="h-screen p-6 grid place-items-center bg-gradient-to-b from-white to-neutral-100 dark:from-neutral-950 dark:to-neutral-900"
+    class="to-neutral-100 dark:from-neutral-950 dark:to-neutral-900 grid place-items-center p-6 h-screen bg-gradient-to-b from-white"
   >
     <div class="fixed top-4 left-4 z-50">
       <UButton
@@ -14,16 +14,16 @@
     </div>
 
     <UCard class="w-full max-w-3xl">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center gap-2">
+      <div class="flex justify-between items-center">
+        <div class="flex gap-2 items-center">
           <div>
             <div class="text-lg font-semibold">上传图片</div>
-            <div class="text-xs text-neutral-500 dark:text-neutral-400">
+            <div class="text-neutral-500 dark:text-neutral-400 text-xs">
               支持拖拽或点击选择，多张预览
             </div>
           </div>
         </div>
-        <div class="flex items-center gap-2">
+        <div class="flex gap-2 items-center">
           <!-- -->
           <UButton
             color="neutral"
@@ -46,7 +46,7 @@
 
       <div class="mt-4">
         <div
-          class="group rounded-2xl border-2 border-dashed border-neutral-200 dark:border-neutral-800 bg-white/70 dark:bg-neutral-900/50 backdrop-blur p-8 text-center cursor-pointer hover:border-primary hover:bg-white/90 dark:hover:bg-neutral-900"
+          class="group border-neutral-200 dark:border-neutral-800 bg-white/70 dark:bg-neutral-900/50 hover:border-primary hover:bg-white/90 dark:hover:bg-neutral-900 p-8 text-center rounded-2xl border-2 border-dashed backdrop-blur cursor-pointer"
           @dragover.prevent
           @drop.prevent="onDrop"
           @click="pickFiles"
@@ -59,13 +59,13 @@
             accept="image/*"
             @change="onSelectFiles"
           />
-          <div class="flex flex-col items-center gap-2">
+          <div class="flex flex-col gap-2 items-center">
             <UIcon
               name="i-heroicons-photo-20-solid"
               class="size-8 text-neutral-600 dark:text-neutral-300"
             />
             <div class="text-sm">拖拽图片到此或点击选择</div>
-            <div class="text-xs text-neutral-500 dark:text-neutral-400">
+            <div class="text-neutral-500 dark:text-neutral-400 text-xs">
               已选择 {{ items.length }} 张
             </div>
           </div>
@@ -79,17 +79,17 @@
       <div v-if="items.length" class="mt-6">
         <div class="max-h-[60vh] overflow-y-auto custom-scrollbar pr-1">
           <div
-            class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3"
+            class="sm:grid-cols-3 md:grid-cols-4 grid grid-cols-2 gap-3"
             v-viewer="viewerOptions"
           >
             <div
               v-for="it in items"
               :key="it.id"
-              class="relative overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-800"
+              class="border-neutral-200 dark:border-neutral-800 overflow-hidden relative rounded-xl border"
             >
-              <img :src="it.url" alt="" class="w-full h-40 object-cover" />
+              <img :src="it.url" alt="" class="object-cover w-full h-40" />
               <div
-                class="absolute inset-x-0 bottom-0 p-2 text-white text-xs bg-gradient-to-t from-black/70 to-transparent"
+                class="from-black/70 absolute inset-x-0 bottom-0 p-2 text-xs text-white bg-gradient-to-t to-transparent"
               >
                 <div class="truncate">{{ it.name }}</div>
               </div>
@@ -161,19 +161,21 @@ function clearFiles() {
 function simulateUpload() {
   uploading.value = true;
   progress.value = 0;
-  const t = setInterval(() => {
-    progress.value = Math.min(100, progress.value + 5);
-    if (progress.value >= 100) {
-      clearInterval(t);
-      uploading.value = false;
-      useToast().add({
-        title: "上传完成",
-        description: `共 ${items.value.length} 张图片`,
-        color: "success",
-      });
-      clearFiles();
-    }
-  }, 100);
+  console.log("item.value==> ", items.value[0].url);
+  // const t = setInterval(() => {
+  //   progress.value = Math.min(100, progress.value + 5);
+  //   if (progress.value >= 100) {
+  //     clearInterval(t);
+  //     uploading.value = false;
+  //     useToast().add({
+  //       title: "上传完成",
+  //       description: `共 ${items.value.length} 张图片`,
+  //       color: "success",
+  //     });
+  //     clearFiles();
+  //   }
+  // }, 100);
+  // 接口请求
 }
 
 // 图片查看器配置
