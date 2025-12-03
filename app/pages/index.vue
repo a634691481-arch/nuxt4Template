@@ -1,7 +1,5 @@
 <template>
-  <!-- <client-only> -->
   <div class="p-1" v-viewer="viewerOptions">
-    <!--  -->
     <MasonryWall :items="items" :column-width="280" :gap="5" :ssr-columns="1">
       <template #default="x">
         <div v-if="x.index == 0" class="absolute inset-0 z-40 bg-gray-700">
@@ -10,38 +8,36 @@
         <motion.div
           :initial="{ opacity: 0, y: 500 }"
           :animate="{ opacity: 1, y: 0 }"
-          :transition="{ delay: x.index ? x.index * 0.1 : 0 }"
-          class="rounded-md overflow-hidden border-2 border-neutral-200 dark:border-neutral-800"
+          :transition="{ delay: x.index ? x.index * 0.1 : 0, duration: 0.5 }"
+          class="border-white/70 overflow-hidden border-2"
           :whileInView="{ opacity: 1, y: 0 }"
           :exit="{ opacity: 0, y: 500 }"
         >
           <div
             :class="[`aspect-[${x?.item?.ratio}]`]"
-            class="group relative w-full overflow-hidden bg-neutral-100"
+            class="group bg-neutral-100 overflow-hidden relative w-full"
             :style="{ aspectRatio: x?.item?.ratio }"
           >
             <img
               :src="x?.item?.src"
               alt="图片"
-              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 z-0 cursor-pointer"
+              class="group-hover:scale-105 object-cover z-0 w-full h-full transition-transform duration-300 cursor-pointer"
               loading="lazy"
             />
             <div
-              class="absolute inset-0 z-10 pointer-events-none bg-img opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              class="bg-img group-hover:opacity-100 absolute inset-0 z-10 opacity-0 transition-opacity duration-300 pointer-events-none"
             ></div>
             <div
-              class="absolute inset-x-0 bottom-0 z-20 p-3 text-white opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300"
+              class="group-hover:opacity-100 group-hover:translate-y-0 absolute inset-x-0 bottom-0 z-20 p-3 text-white opacity-0 transition-all duration-300 translate-y-2"
             >
               <div class="text-sm font-semibold">{{ x?.item?.name }}</div>
               <div class="text-xs">{{ x?.item?.date }}</div>
             </div>
           </div>
         </motion.div>
-        <!-- </AnimatePresence> -->
       </template>
     </MasonryWall>
   </div>
-  <!-- </client-only> -->
 </template>
 
 <script setup>

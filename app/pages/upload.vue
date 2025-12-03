@@ -111,6 +111,8 @@
 </template>
 
 <script setup>
+// 接口请求
+
 const fileInput = ref(); // 文件选择 input 元素
 const items = ref([]); // 已选图片列表
 const uploading = ref(false); // 是否正在上传
@@ -123,6 +125,7 @@ function pickFiles() {
 // 处理 input[file] 选择事件：加入文件并重置 input 值
 function onSelectFiles(e) {
   const files = Array.from(e.target.files || []);
+
   addFiles(files);
   e.target.value = null;
 }
@@ -135,13 +138,15 @@ function onDrop(e) {
 function addFiles(files) {
   const imgs = files
     .filter((f) => f.type.startsWith("image/"))
-    .map((f) => ({
-      id: Math.random().toString(36).slice(2),
-      file: f,
-      url: URL.createObjectURL(f),
-      name: f.name,
-      size: f.size,
-    }));
+    .map((f) => {
+      return {
+        id: Math.random().toString(36).slice(2),
+        file: f,
+        url: URL.createObjectURL(f),
+        name: f.name,
+        size: f.size,
+      };
+    });
   items.value = [...items.value, ...imgs];
 }
 // 撤销预览并从列表移除指定图片
@@ -158,10 +163,10 @@ function clearFiles() {
   items.value = [];
 }
 // 模拟上传进度，完成后提示并清空列表
-function simulateUpload() {
+async function simulateUpload() {
   uploading.value = true;
   progress.value = 0;
-  console.log("item.value==> ", items.value[0].url);
+
   // const t = setInterval(() => {
   //   progress.value = Math.min(100, progress.value + 5);
   //   if (progress.value >= 100) {
@@ -176,6 +181,19 @@ function simulateUpload() {
   //   }
   // }, 100);
   // 接口请求
+  // console.log("items==> ", items);
+  const formData = new FormData();
+  console.log("res==> ", items.value[0]);
+  formData.append("images", items.value[0].url);
+  console.log("🚀 ~ simulateUpload ~ formData:", formData);
+
+  // 接口请求
+  let { data } = await useApi().get("/pub.index.uploadImage", {
+    params: {
+      fileContent: formData,
+    },
+  });
+  console.log("data==> ", data);
 }
 
 // 图片查看器配置

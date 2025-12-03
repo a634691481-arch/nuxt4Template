@@ -15,7 +15,10 @@ export default defineNuxtConfig({
     // 仅服务端可用的私有键
     name: "yangliu",
     // 客户端和服务端都可用的公共键
-    public: { apiBase: "/api" },
+    public: {
+      apiBase:
+        "https://fc-mp-4b52669b-325d-4090-9588-abf3b7afcb11.next.bspapp.com/http/router/client",
+    },
   },
   //
   css: ["~/assets/css/main.css"],
@@ -39,8 +42,8 @@ export default defineNuxtConfig({
     },
   },
   plugins: [
-    { src: "~/plugins/vue-masonry-wall.ts" },
-    { src: "~/plugins/viewer.ts" },
+    { src: "~/plugins/vue-masonry-wall.js" },
+    { src: "~/plugins/viewer.js" },
   ],
 
   ui: {

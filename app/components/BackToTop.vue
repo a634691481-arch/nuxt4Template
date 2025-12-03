@@ -2,10 +2,10 @@
   <AnimatePresence :initial="false">
     <motion.div
       v-if="visible"
-      class="fixed bottom-6 right-6 z-50 cursor-pointer"
+      class="fixed right-6 bottom-6 z-50 cursor-pointer"
       :initial="{ opacity: 0, scale: 0 }"
-      :animate="{ opacity: 1, scale: 1, rotate: 360 }"
-      :exit="{ opacity: 0, scale: 0, rotate: 360 }"
+      :animate="{ opacity: 1, scale: 1, rotate: 360 * 4 }"
+      :exit="{ opacity: 0, scale: 0 }"
       :transition="{ duration: 1 }"
       :whileHover="{ scale: 1.1 }"
       :whilePress="{ scale: 0.9 }"
