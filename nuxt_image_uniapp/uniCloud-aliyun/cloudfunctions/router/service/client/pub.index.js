@@ -54,19 +54,21 @@ let cloudObject = {
 			code: 0,
 			msg: ''
 		}
-
+		res.data = data
+		return res
 		// 获取当前月份
 		let month = new Date().getMonth() + 1
 		// 获取当前年份
 		let year = new Date().getFullYear()
 		let timestamp = Date.now()
-
-		let uploadFileRes = await vk.uploadFile({
-			cloudPath: year + '/' + month + '/' + timestamp + '.jpg',
-			fileContent: data.fileContent
-		})
-		console.log('uploadFileRes: ', uploadFileRes.url)
-		res.url = uploadFileRes.url
+	 
+		// const buffer = Buffer.alloc(1024); 
+		// let uploadFileRes = await vk.uploadFile({
+		// 	cloudPath: year + '/' + month + '/' + timestamp + '.jpg',
+		// 	fileContent:buffer
+		// })
+		// console.log('uploadFileRes: ', uploadFileRes.url)
+		// res.url = uploadFileRes.url
 		return res
 
 		// let exifInfo = await exif.readFromURL(uploadFileRes.url)

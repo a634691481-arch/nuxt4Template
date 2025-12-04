@@ -166,34 +166,41 @@ function clearFiles() {
 async function simulateUpload() {
   uploading.value = true;
   progress.value = 0;
-
-  // const t = setInterval(() => {
-  //   progress.value = Math.min(100, progress.value + 5);
-  //   if (progress.value >= 100) {
-  //     clearInterval(t);
-  //     uploading.value = false;
-  //     useToast().add({
-  //       title: "上传完成",
-  //       description: `共 ${items.value.length} 张图片`,
-  //       color: "success",
-  //     });
-  //     clearFiles();
-  //   }
-  // }, 100);
-  // 接口请求
-  // console.log("items==> ", items);
-  const formData = new FormData();
-  console.log("res==> ", items.value[0]);
-  formData.append("images", items.value[0].url);
-  console.log("🚀 ~ simulateUpload ~ formData:", formData);
-
-  // 接口请求
-  let { data } = await useApi().get("/pub.index.uploadImage", {
-    params: {
-      fileContent: formData,
-    },
-  });
-  console.log("data==> ", data);
+  const t = setInterval(() => {
+    progress.value = Math.min(95, progress.value + 5);
+  }, 150);
+  try {
+    const form = new FormData();
+    items.value.forEach((it) => {
+      form.append("fileContent", it.file, it.name);
+    });
+    const { data, error } = await useApi().post(
+      "/pub.index.uploadImage",
+      {},
+      form
+    );
+    console.log("🚀 ~ simulateUpload ~ data:", data?.value);
+    if (error?.value) throw error.value;
+    clearInterval(t);
+    progress.value = 100;
+    uploading.value = false;
+    useToast().add({
+      title: "上传完成",
+      description: `共 ${items.value.length} 张图片`,
+      color: "success",
+    });
+    clearFiles();
+    console.log("data==>", data?.value);
+  } catch (err) {
+    console.log("🚀 ~ simulateUpload ~ err:", err);
+    clearInterval(t);
+    uploading.value = false;
+    useToast().add({
+      title: "上传失败",
+      description: (err && err.message) || "请稍后重试",
+      color: "error",
+    });
+  }
 }
 
 // 图片查看器配置
