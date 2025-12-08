@@ -7,21 +7,14 @@
       <div v-if="profilePending">加载中...</div>
       <div v-else-if="profileError">加载失败</div>
       <pre v-else class="bg-neutral-100 p-3 rounded">{{ profileData }}</pre>
-      <UButton size="sm" color="neutral" variant="ghost" @click="refreshProfile"
-        >刷新</UButton
-      >
+      <UButton size="sm" color="neutral" variant="ghost" @click="refreshProfile">刷新</UButton>
     </section>
 
     <section class="space-y-2">
       <h2 class="font-medium">登录（仅客户端）</h2>
       <div class="flex gap-2 items-center">
         <UInput v-model="username" placeholder="用户名" class="w-48" />
-        <UInput
-          v-model="password"
-          type="password"
-          placeholder="密码"
-          class="w-48"
-        />
+        <UInput v-model="password" type="password" placeholder="密码" class="w-48" />
         <UButton @click="doLogin">登录</UButton>
       </div>
       <div v-if="loginError" class="text-red-600">登录失败</div>
@@ -32,9 +25,7 @@
       <h2 class="font-medium">图片列表（lazy + 刷新/取消）</h2>
       <div class="flex gap-2 items-center">
         <UButton @click="loadImages">加载</UButton>
-        <UButton color="neutral" variant="ghost" @click="cancelImages"
-          >取消</UButton
-        >
+        <UButton color="neutral" variant="ghost" @click="cancelImages">取消</UButton>
       </div>
       <div v-if="imagesPending">加载中...</div>
       <div v-else-if="imagesError">加载失败</div>
