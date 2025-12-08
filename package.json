@@ -17,6 +17,7 @@
     "@nuxt/ui": "^4.2.1",
     "@nuxtjs/seo": "^3.2.2",
     "@yeger/vue-masonry-wall": "^5.1.4",
+    "axios": "^1.13.2",
     "motion-v": "^1.7.4",
     "nuxt": "^4.2.1",
     "v-viewer": "^3.0.22",

@@ -1,7 +1,7 @@
 'use strict'
 let vk
 const dbName = {
-	//test: "vk-test",
+  //test: "vk-test",
 }
 
 const exif = require('exif-js')
@@ -10,65 +10,66 @@ let _ = db.command
 let $ = _.aggregate
 
 let cloudObject = {
-	isCloudObject: true,
+  isCloudObject: true,
 
-	_before: async function() {
-		vk = this.vk
-		// let { customUtil, uniID, config, pubFun } = this.getUtil(); // 获取工具包
-	},
+  _before: async function () {
+    vk = this.vk
+    // let { customUtil, uniID, config, pubFun } = this.getUtil(); // 获取工具包
+  },
 
-	_after: async function(options) {
-		let { err, res } = options
-		if (err) {
-			return
-		}
-		return res
-	},
-	//
-	//
-	//
-	//
-	// 获取图片列表
-	getImageList: async function(data) {
+  _after: async function (options) {
+    let { err, res } = options
+    if (err) {
+      return
+    }
+    return res
+  },
+  //
+  //
+  //
+  //
+  // 获取图片列表
+  getImageList: async function (data) {
+    let res = {
+      code: 0,
+      msg: ''
+    }
+    // res.data = await db.collection('image').get()
+    res.data = 1
+    return res
+  },
+  // 单个删除图片
+  deleteImage: async function (data) {
+    let res = {
+      code: 0,
+      msg: ''
+    }
+    res.data = 1
+    // res.data = await db.collection('image').doc(data.id).remove()
+    return res
+  },
+  //上传图片
+  uploadImage: async function (data) {
+    const httpInfo = this.getHttpInfo()
 		let res = {
 			code: 0,
 			msg: ''
 		}
-		// res.data = await db.collection('image').get()
-		res.data = 1
-		return res
-	},
-	// 单个删除图片
-	deleteImage: async function(data) {
-		let res = {
-			code: 0,
-			msg: ''
-		}
-		res.data = 1
-		// res.data = await db.collection('image').doc(data.id).remove()
-		return res
-	},
-	//上传图片
-	uploadImage: async function(data) {
-		let res = {
-			code: 0,
-			msg: ''
-		}
+		res.httpInfo = httpInfo || ''
 		res.data = data
-		return res
 		// 获取当前月份
 		let month = new Date().getMonth() + 1
 		// 获取当前年份
 		let year = new Date().getFullYear()
-		let timestamp = Date.now()
+    let month = now.getMonth() + 1
 	 
 		// const buffer = Buffer.alloc(1024); 
-		// let uploadFileRes = await vk.uploadFile({
-		// 	cloudPath: year + '/' + month + '/' + timestamp + '.jpg',
-		// 	fileContent:buffer
-		// })
+		let uploadFileRes = await vk.uploadFile({
+			// cloudPath: year + '/' + month + '/' + timestamp + '.jpg',
+			fileContent:buffer
+		})
 		// console.log('uploadFileRes: ', uploadFileRes.url)
-		// res.url = uploadFileRes.url
+		res.url = uploadFileRes
 		return res
 
 		// let exifInfo = await exif.readFromURL(uploadFileRes.url)
@@ -83,8 +84,8 @@ let cloudObject = {
 		})
 		res.info = info
 		console.log('info==> ', info)
-		return res
-	}
+    res.data = { fileURL, exif, id }
+    return res
+  }
 }
 
-module.exports = cloudObject

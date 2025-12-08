@@ -8,8 +8,11 @@
         <motion.div
           :initial="{ opacity: 0, y: 500 }"
           :animate="{ opacity: 1, y: 0 }"
-          :transition="{ delay: x.index ? x.index * 0.1 : 0, duration: 0.5 }"
-          class="border-white/70 overflow-hidden border-2"
+          :transition="{
+            delay: x.index ? x.index * 0.1 : 0,
+            duration: x.index ? 0.5 : 0,
+          }"
+          class="overflow-hidden"
           :whileInView="{ opacity: 1, y: 0 }"
           :exit="{ opacity: 0, y: 500 }"
         >
