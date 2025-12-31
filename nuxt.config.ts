@@ -16,8 +16,7 @@ export default defineNuxtConfig({
     name: "yangliu",
     // 客户端和服务端都可用的公共键
     public: {
-      apiBase:
-        "https://fc-mp-4b52669b-325d-4090-9588-abf3b7afcb11.next.bspapp.com/http/router/client",
+      apiBase: "http://localhost:3333/",
     },
   },
   //

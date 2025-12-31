@@ -1,8 +1,8 @@
 <template>
   <div
-    class="to-neutral-100 dark:from-neutral-950 dark:to-neutral-900 grid place-items-center p-6 h-screen bg-gradient-to-b from-white"
+    class="to-neutral-100 dark:from-neutral-950 dark:to-neutral-900 place-items-center bg-gradient-to-b from-white grid h-screen p-6"
   >
-    <div class="fixed top-4 left-4 z-50">
+    <div class="top-4 left-4 fixed z-50">
       <UButton
         color="neutral"
         variant="ghost"
@@ -14,8 +14,8 @@
     </div>
 
     <UCard class="w-full max-w-3xl">
-      <div class="flex justify-between items-center">
-        <div class="flex gap-2 items-center">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
           <div>
             <div class="text-lg font-semibold">上传图片</div>
             <div class="text-neutral-500 dark:text-neutral-400 text-xs">
@@ -23,7 +23,7 @@
             </div>
           </div>
         </div>
-        <div class="flex gap-2 items-center">
+        <div class="flex items-center gap-2">
           <!-- -->
           <UButton
             color="neutral"
@@ -46,7 +46,7 @@
 
       <div class="mt-4">
         <div
-          class="group border-neutral-200 dark:border-neutral-800 bg-white/70 dark:bg-neutral-900/50 hover:border-primary hover:bg-white/90 dark:hover:bg-neutral-900 p-8 text-center rounded-2xl border-2 border-dashed backdrop-blur cursor-pointer"
+          class="group border-neutral-200 dark:border-neutral-800 bg-white/70 dark:bg-neutral-900/50 hover:border-primary hover:bg-white/90 dark:hover:bg-neutral-900 rounded-2xl backdrop-blur p-8 text-center border-2 border-dashed cursor-pointer"
           @dragover.prevent
           @drop.prevent="onDrop"
           @click="pickFiles"
@@ -59,7 +59,7 @@
             accept="image/*"
             @change="onSelectFiles"
           />
-          <div class="flex flex-col gap-2 items-center">
+          <div class="flex flex-col items-center gap-2">
             <UIcon
               name="i-heroicons-photo-20-solid"
               class="size-8 text-neutral-600 dark:text-neutral-300"
@@ -85,15 +85,15 @@
             <div
               v-for="it in items"
               :key="it.id"
-              class="border-neutral-200 dark:border-neutral-800 overflow-hidden relative rounded-xl border"
+              class="border-neutral-200 dark:border-neutral-800 rounded-xl relative overflow-hidden border"
             >
               <img :src="it.url" alt="" class="object-cover w-full h-40" />
               <div
-                class="from-black/70 absolute inset-x-0 bottom-0 p-2 text-xs text-white bg-gradient-to-t to-transparent"
+                class="from-black/70 bg-gradient-to-t to-transparent absolute inset-x-0 bottom-0 p-2 text-xs text-white"
               >
                 <div class="truncate">{{ it.name }}</div>
               </div>
-              <div class="absolute top-2 right-2">
+              <div class="top-2 right-2 absolute">
                 <UButton
                   size="xs"
                   color="neutral"
@@ -162,42 +162,53 @@ function clearFiles() {
   items.value.forEach((i) => URL.revokeObjectURL(i.url));
   items.value = [];
 }
-// 模拟上传进度，完成后提示并清空列表
+// 上传所有图片，支持批量上传
 async function simulateUpload() {
+  if (items.value.length === 0) return;
+
   uploading.value = true;
   progress.value = 0;
-  const t = setInterval(() => {
-    progress.value = Math.min(95, progress.value + 5);
-  }, 150);
+
   try {
-    const form = new FormData();
-    items.value.forEach((it) => {
-      form.append("fileContent", it.file, it.name);
-    });
-    const { data, error } = await useApi().post(
-      "/pub.index.uploadImage",
-      {},
-      form
-    );
-    console.log("🚀 ~ simulateUpload ~ data:", data?.value);
-    if (error?.value) throw error.value;
-    clearInterval(t);
-    progress.value = 100;
+    const totalFiles = items.value.length;
+    const uploadedUrls = [];
+
+    for (let i = 0; i < totalFiles; i++) {
+      const currentItem = items.value[i];
+      const formData = new FormData();
+      formData.append("file", currentItem.file);
+
+      const { data, error } = await useApi().post(
+        "/api/upload/image",
+        {},
+        formData
+      );
+
+      if (error?.value) {
+        console.error(`❌ 上传失败 ${currentItem.name}:`, error.value);
+        throw error.value;
+      }
+
+      if (data?.value?.url) uploadedUrls.push(data.value.url);
+      console.log(`✅ 已上传 ${currentItem.name}`);
+
+      progress.value = Math.round(((i + 1) / totalFiles) * 100);
+    }
+
     uploading.value = false;
     useToast().add({
       title: "上传完成",
-      description: `共 ${items.value.length} 张图片`,
+      description: `成功上传 ${uploadedUrls.length} 张图片`,
       color: "success",
     });
+
+    console.log("所有图片上传完成:", uploadedUrls);
     clearFiles();
-    console.log("data==>", data?.value);
   } catch (err) {
-    console.log("🚀 ~ simulateUpload ~ err:", err);
-    clearInterval(t);
     uploading.value = false;
     useToast().add({
       title: "上传失败",
-      description: (err && err.message) || "请稍后重试",
+      description: err?.message || err?.data?.message || "上传失败，请稍后重试",
       color: "error",
     });
   }
