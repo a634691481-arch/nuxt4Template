@@ -1,5 +1,6 @@
 <template>
   <div class="p-1" v-viewer="viewerOptions">
+    //{{ items }}//
     <MasonryWall :items="items" :column-width="280" :gap="5" :ssr-columns="1">
       <template #default="x">
         <div v-if="x.index == 0" class="absolute inset-0 z-40 bg-gray-700">
@@ -18,23 +19,23 @@
         >
           <div
             :class="[`aspect-[${x?.item?.ratio}]`]"
-            class="group bg-neutral-100 overflow-hidden relative w-full"
+            class="group bg-neutral-100 relative w-full overflow-hidden"
             :style="{ aspectRatio: x?.item?.ratio }"
           >
             <img
-              :src="x?.item?.src"
+              :src="x?.item?.fileUrl"
               alt="图片"
-              class="group-hover:scale-105 object-cover z-0 w-full h-full transition-transform duration-300 cursor-pointer"
+              class="group-hover:scale-105 z-0 object-cover w-full h-full transition-transform duration-300 cursor-pointer"
               loading="lazy"
             />
             <div
-              class="bg-img group-hover:opacity-100 absolute inset-0 z-10 opacity-0 transition-opacity duration-300 pointer-events-none"
+              class="bg-img group-hover:opacity-100 absolute inset-0 z-10 transition-opacity duration-300 opacity-0 pointer-events-none"
             ></div>
             <div
-              class="group-hover:opacity-100 group-hover:translate-y-0 absolute inset-x-0 bottom-0 z-20 p-3 text-white opacity-0 transition-all duration-300 translate-y-2"
+              class="group-hover:opacity-100 group-hover:translate-y-0 absolute inset-x-0 bottom-0 z-20 p-3 text-white transition-all duration-300 translate-y-2 opacity-0"
             >
-              <div class="text-sm font-semibold">{{ x?.item?.name }}</div>
-              <div class="text-xs">{{ x?.item?.date }}</div>
+              <div class="text-sm font-semibold">{{ x?.item?.title }}</div>
+              <!-- <div class="text-xs">{{ x?.item?.date }}</div> -->
             </div>
           </div>
         </motion.div>
@@ -47,23 +48,26 @@
 import { motion, scale } from "motion-v";
 
 const toast = useToast();
+const items = ref([]);
 
-const ratios = ["1/1", "4/3", "3/4", "16/9", "9/16", "3/2", "2/3"];
-function genItems(count = 40) {
-  return Array.from({ length: count }, (_, index) => {
-    const ratio =
-      index === 0 ? "16/9" : ratios[Math.floor(Math.random() * ratios.length)];
-    const id = Math.floor(Math.random() * 1000);
-    return {
-      id,
-      ratio,
-      src: `https://picsum.photos/id/${id}/1200/1200`,
-      date: new Date().toLocaleDateString(),
-      name: `Item ${id}`,
-    };
-  });
-}
-const items = ref(genItems());
+const { data } = await useApi().get("/api/index", {
+  server: false,
+});
+
+// 打印完整的响应数据
+console.log("完整响应 data.value:", data);
+console.log("完整响应 data.value:", data.flags);
+console.log("完整响应 data.value:", data.value);
+// console.log("data.value.data:", data.value?.data);
+
+// 直接赋值
+// if (data.value?.data) {
+//   items.value = data.value.data;
+// } else if (Array.isArray(data.value)) {
+//   items.value = data.value;
+// } else {
+//   items.value = [];
+// }
 
 const user = {
   name: "Yangliu",

@@ -24,7 +24,6 @@ export const createApi = (opts = {}) => {
    * @returns {object} useFetch 响应对象，额外包含 cancel()
    */
   const request = (url, options = {}) => {
-    console.log("🚀 ~ :27 ~ request ~ options:", options);
     // 用于取消请求
     const controller = new AbortController();
     // 合并默认鉴权头与外部传入的 headers
