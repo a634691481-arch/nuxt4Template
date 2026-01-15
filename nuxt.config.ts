@@ -30,16 +30,20 @@ export default defineNuxtConfig({
     prerender: {
       failOnError: false,
     },
-  },
-  compatibilityDate: "2025-01-15",
-  eslint: {
-    config: {
-      stylistic: {
-        commaDangle: "never",
-        braceStyle: "1tbs",
+    experimental: {
+      wasm: true,
+    },
+    typescript: {
+      tsConfig: {
+        compilerOptions: {
+          experimentalDecorators: true,
+          emitDecoratorMetadata: true,
+        },
       },
     },
   },
+  compatibilityDate: "2025-01-15",
+
   plugins: [
     { src: "~/plugins/vue-masonry-wall.js" },
     { src: "~/plugins/viewer.js" },
