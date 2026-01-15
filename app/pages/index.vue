@@ -1,6 +1,5 @@
 <template>
   <div class="p-1" v-viewer="viewerOptions">
-    //{{ items }}//
     <MasonryWall :items="items" :column-width="280" :gap="5" :ssr-columns="1">
       <template #default="x">
         <div v-if="x.index == 0" class="absolute inset-0 z-40 bg-gray-700">
