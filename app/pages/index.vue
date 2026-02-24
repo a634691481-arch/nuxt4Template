@@ -1,6 +1,6 @@
 <template>
   <div class="p-1" v-viewer="viewerOptions">
-    <MasonryWall :items="items" :column-width="280" :gap="5" :ssr-columns="1">
+    <MasonryWall :items="items" :column-width="280" :gap="6" :ssr-columns="1">
       <template #default="x">
         <div v-if="x.index == 0" class="absolute inset-0 z-40 bg-gray-700">
           <UserInforMation :user="user"></UserInforMation>
@@ -17,12 +17,11 @@
           :exit="{ opacity: 0, y: 500 }"
         >
           <div
-            :class="[`aspect-[${x?.item?.ratio}]`]"
             class="group bg-neutral-100 relative w-full overflow-hidden"
-            :style="{ aspectRatio: x?.item?.ratio }"
+            :style="{ aspectRatio: x?.ratio || '1 / 1' }"
           >
             <img
-              :src="x?.item?.fileUrl"
+              :src="x.item.url || ''"
               alt="图片"
               class="group-hover:scale-105 z-0 object-cover w-full h-full transition-transform duration-300 cursor-pointer"
               loading="lazy"
@@ -33,14 +32,13 @@
             <div
               class="group-hover:opacity-100 group-hover:translate-y-0 absolute inset-x-0 bottom-0 z-20 p-3 text-white transition-all duration-300 translate-y-2 opacity-0"
             >
-              <div class="text-sm font-semibold">{{ x?.item?.title }}</div>
+              <div class="text-sm font-semibold">8888</div>
               <!-- <div class="text-xs">{{ x?.item?.date }}</div> -->
             </div>
           </div>
         </motion.div>
       </template>
     </MasonryWall>
-    {{ items2 }}
   </div>
 </template>
 
@@ -49,12 +47,12 @@
 
   const toast = useToast()
   const items = ref([])
-  const items2 = ref([])
 
   const x = await $fetch(`${useRuntimeConfig().public.apiBase}/pub.index.getImages`, {
     method: 'GET'
   })
-  items2.value = x.data
+  items.value = x.data
+  console.log('🚀 ~ :56 ~ items.value:', items.value)
 
   const user = {
     name: 'Yangliu',
