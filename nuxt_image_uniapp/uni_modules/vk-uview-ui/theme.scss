@@ -1,0 +1,64 @@
+// 此文件为uView的主题变量，这些变量目前只能通过uni.scss引入才有效，另外由于
+// uni.scss中引入的样式会同时混入到全局样式文件和单独每一个页面的样式中，造成微信程序包太大，
+// 故uni.scss只建议放scss变量名相关样式，其他的样式可以通过main.js或者App.vue引入
+
+$u-main-color: #303133;
+$u-content-color: #606266;
+$u-tips-color: #909399;
+$u-light-color: #c0c4cc;
+$u-border-color: #e4e7ed;
+$u-bg-color: #f3f4f6;
+
+ 
+ 
+ 
+
+$u-type-primary: #2E8B57;
+$u-type-primary-disabled: #61bc84;
+$u-type-primary-dark: #1E5B3A;
+$u-type-primary-light: #c6ffe6;
+
+/* 全局定义 CSS 变量（森系绿色+深色背景） */
+:root {
+  /* 主色调（森系绿） */
+  --primary-100:#2E8B57;  /* 深绿（主按钮/标题） */
+  --primary-200:#61bc84;  /* 中绿（次要按钮/高亮） */
+  --primary-300:#c6ffe6;  /* 浅绿（背景/点缀） */
+  /* 强调色 */
+  --accent-100:#8FBC8F;   /* 草绿（边框/图标） */
+  --accent-200:#345e37;   /* 暗绿（hover 效果） */
+  /* 文字色 */
+  --text-100:#FFFFFF;     /* 纯白（主要文字） */
+  --text-200:#e0e0e0;     /* 浅灰（次要文字/提示） */
+  /* 背景色 */
+  --bg-100:#1E1E1E;       /* 最深背景（页面底色） */
+  --bg-200:#2d2d2d;       /* 中深背景（卡片/容器） */
+  --bg-300:#454545;       /* 浅深背景（输入框/按钮） */
+}
+
+ 
+
+
+ 
+$u-type-warning: #ff9900;
+$u-type-warning-disabled: #fcbd71;
+$u-type-warning-dark: #f29100;
+$u-type-warning-light: #fdf6ec;
+
+$u-type-success: #19be6b;
+$u-type-success-disabled: #71d5a1;
+$u-type-success-dark: #18b566;
+$u-type-success-light: #dbf1e1;
+
+$u-type-error: #fa3534;
+$u-type-error-disabled: #fab6b6;
+$u-type-error-dark: #dd6161;
+$u-type-error-light: #fef0f0;
+
+$u-type-info: #909399;
+$u-type-info-disabled: #c8c9cc;
+$u-type-info-dark: #82848a;
+$u-type-info-light: #f4f4f5;
+
+$u-form-item-height: 70rpx;
+$u-form-item-border-color: #dcdfe6;
