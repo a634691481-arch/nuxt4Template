@@ -40,6 +40,7 @@
         </motion.div>
       </template>
     </MasonryWall>
+    {{ items2 }}
   </div>
 </template>
 
@@ -48,25 +49,12 @@
 
   const toast = useToast()
   const items = ref([])
+  const items2 = ref([])
 
-  const { data } = await useApi().get('pub.index.getImages', {
-    server: false
+  const x = await $fetch(`${useRuntimeConfig().public.apiBase}/pub.index.getImages`, {
+    method: 'GET'
   })
-
-  // 打印完整的响应数据
-  console.log('完整响应 data.value:', data)
-  console.log('完整响应 data.value:', data.flags)
-  console.log('完整响应 data.value:', data.value)
-  // console.log("data.value.data:", data.value?.data);
-
-  // 直接赋值
-  // if (data.value?.data) {
-  //   items.value = data.value.data;
-  // } else if (Array.isArray(data.value)) {
-  //   items.value = data.value;
-  // } else {
-  //   items.value = [];
-  // }
+  items2.value = x.data
 
   const user = {
     name: 'Yangliu',
