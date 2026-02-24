@@ -56,6 +56,11 @@
   const x = await $fetch(`${useRuntimeConfig().public.apiBase}/pub.index.getImages`, {
     method: 'GET'
   })
+
+  const xx = await $fetch(`${useRuntimeConfig().public.apiBase}/pub.index.getCount`, {
+    method: 'GET'
+  })
+
   items.value = x.data
   console.log('🚀 ~ :56 ~ items.value:', items.value)
 
