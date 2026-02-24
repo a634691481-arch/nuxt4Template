@@ -10,7 +10,7 @@
           :animate="{ opacity: 1, y: 0 }"
           :transition="{
             delay: x.index ? x.index * 0.1 : 0,
-            duration: x.index ? 0.5 : 0,
+            duration: x.index ? 0.5 : 0
           }"
           class="overflow-hidden"
           :whileInView="{ opacity: 1, y: 0 }"
@@ -44,58 +44,54 @@
 </template>
 
 <script setup>
-import { motion, scale } from "motion-v";
+  import { motion, scale } from 'motion-v'
 
-const toast = useToast();
-const items = ref([]);
+  const toast = useToast()
+  const items = ref([])
 
-const { data } = await useApi().get("/api/index", {
-  server: false,
-});
+  const { data } = await useApi().get('pub.index.getImages', {
+    server: false
+  })
 
-// 打印完整的响应数据
-console.log("完整响应 data.value:", data);
-console.log("完整响应 data.value:", data.flags);
-console.log("完整响应 data.value:", data.value);
-// console.log("data.value.data:", data.value?.data);
+  // 打印完整的响应数据
+  console.log('完整响应 data.value:', data)
+  console.log('完整响应 data.value:', data.flags)
+  console.log('完整响应 data.value:', data.value)
+  // console.log("data.value.data:", data.value?.data);
 
-// 直接赋值
-// if (data.value?.data) {
-//   items.value = data.value.data;
-// } else if (Array.isArray(data.value)) {
-//   items.value = data.value;
-// } else {
-//   items.value = [];
-// }
+  // 直接赋值
+  // if (data.value?.data) {
+  //   items.value = data.value.data;
+  // } else if (Array.isArray(data.value)) {
+  //   items.value = data.value;
+  // } else {
+  //   items.value = [];
+  // }
 
-const user = {
-  name: "Yangliu",
-  avatar: `https://i.pravatar.cc/64?u=${Math.floor(Math.random() * 10000)}`,
-};
+  const user = {
+    name: 'Yangliu',
+    avatar: `https://i.pravatar.cc/64?u=${Math.floor(Math.random() * 10000)}`
+  }
 
-const viewerOptions = {
-  toolbar: true,
-  navbar: true,
-  title: false,
-  movable: true,
-  zoomable: true,
-  rotatable: true,
-  transition: true,
-};
+  const viewerOptions = {
+    toolbar: true,
+    navbar: true,
+    title: false,
+    movable: true,
+    zoomable: true,
+    rotatable: true,
+    transition: true
+  }
 </script>
 
 <style lang="scss" scoped>
-.bg-img {
-  background-image: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.7),
-    rgba(0, 0, 0, 0.3)
-  );
-}
-.masonry-item {
-  position: relative !important;
-}
-::v-deep(.masonry-item) {
-  position: relative !important;
-}
+  .bg-img {
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
+  }
+  .masonry-item {
+    position: relative !important;
+  }
+  ::v-deep(.masonry-item) {
+    position: relative !important;
+  }
 </style>

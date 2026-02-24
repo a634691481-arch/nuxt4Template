@@ -1,68 +1,59 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: [
-    "@nuxt/eslint",
-    "@nuxt/ui",
-    "@formkit/auto-animate",
-    "@nuxtjs/seo",
-    "motion-v/nuxt",
-  ],
+  modules: ['@nuxt/eslint', '@nuxt/ui', '@formkit/auto-animate', '@nuxtjs/seo', 'motion-v/nuxt'],
 
   devtools: {
-    enabled: true,
+    enabled: true
   },
   runtimeConfig: {
     // 仅服务端可用的私有键
-    name: "yangliu",
+    name: 'yangliu',
     // 客户端和服务端都可用的公共键
     public: {
-      apiBase: "http://localhost:3333/",
-    },
+      apiBase: 'https://fc-mp-a1d8d854-b0e9-4592-8f2f-0afb0cc5e817.next.bspapp.com/http/router/client'
+    }
   },
   //
-  css: ["~/assets/css/main.css"],
+  css: ['~/assets/css/main.css'],
 
   routeRules: {
-    "/": { prerender: true },
+    '/': { prerender: true }
   },
   nitro: {
-    preset: "vercel",
+    preset: 'vercel',
     prerender: {
-      failOnError: false,
+      failOnError: false
     },
     experimental: {
-      wasm: true,
+      wasm: true
     },
     typescript: {
       tsConfig: {
         compilerOptions: {
           experimentalDecorators: true,
-          emitDecoratorMetadata: true,
-        },
-      },
-    },
+          emitDecoratorMetadata: true
+        }
+      }
+    }
   },
-  compatibilityDate: "2025-01-15",
+  compatibilityDate: '2025-01-15',
 
-  plugins: [
-    { src: "~/plugins/vue-masonry-wall.js" },
-    { src: "~/plugins/viewer.js" },
-  ],
+  plugins: [{ src: '~/plugins/vue-masonry-wall.js' }, { src: '~/plugins/viewer.js' }],
 
   ui: {
     fonts: false, // 禁用默认字体加载，使用自定义字体
     mdc: true, // 启用 Markdown 组件支持
     content: true, // 启用内容模块
     experimental: {
-      componentDetection: true, // 开启实验性组件自动检测
-    },
+      componentDetection: true // 开启实验性组件自动检测
+    }
   },
   app: {
     head: {
-      title: "My Nuxt App",
+      title: 'My Nuxt App',
       htmlAttrs: {
-        lang: "en",
-      },
-    },
-  },
-});
+        lang: 'en'
+      }
+    }
+  }
+})
