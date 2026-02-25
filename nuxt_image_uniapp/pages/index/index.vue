@@ -125,9 +125,25 @@
   }
 
   async function uploadImage() {
-    // 创建一个副本进行处理，避免直接修改原数组
+    // 检查是否有图片需要上传
+    if (state.value.data.length === 0) return vk.toast('没有图片需要上传', 'none')
+
+    // 显示确认对话框
+    // uni.showModal({
+    //   title: '确认上传',
+    //   content: `确定要上传这 ${state.value.data.length} 张图片吗？`,
+    //   success: async function (res) {
+    //     if (res.confirm) {
+
+    //     }
+    //   }
+    // })
+    await performUpload()
+  }
+
+  async function performUpload() {
+    // 创建一个副本来遍历，保持原数组完整直到全部上传完成
     const filesToUpload = [...state.value.data]
-    state.value.data = [] // 清空当前列表，防止新图片加入
 
     // 串行上传，等前一个完成再执行下一个
     for (let i = 0; i < filesToUpload.length; i++) {
@@ -152,12 +168,21 @@
           }
         })
 
+        // 上传成功后，从显示列表中删除当前图片
+        const currentIndex = state.value.data.findIndex(item => item === file)
+        if (currentIndex !== -1) {
+          state.value.data.splice(currentIndex, 1)
+        }
+
         console.log(`第${i + 1}张图片上传成功`)
       } catch (err) {
         console.error('上传失败:', err)
+        // 上传失败的图片保留在列表中
       }
     }
 
+    // 上传完成提示
+    vk.toast('图片上传完成', 'none')
     console.log('所有图片上传完成')
   }
 
