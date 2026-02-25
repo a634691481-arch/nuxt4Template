@@ -73,6 +73,7 @@
             class="aspect-square relative overflow-hidden bg-[#2d2d2d] rounded-lg"
             v-for="(i, k) in state.data"
             :key="k"
+            @click="previewMedia(k)"
           >
             <!-- 图片 -->
             <u-image
@@ -82,7 +83,6 @@
               height="100%"
               mode="aspectFill"
               class="!size-full"
-              @click="previewMedia(k)"
             />
             <!-- 视频 -->
             <video v-else :src="i.path" class="!size-full" show-play-btn show-center-play-btn object-fit="cover" />
@@ -239,7 +239,8 @@
         url: 'client/pub.index.addImage',
         title: '',
         data: {
-          url: uploadRes.url
+          url: uploadRes.url,
+          type: file.fileType || (file.duration ? 'video' : 'image') // 传递类型参数
         }
       })
 
