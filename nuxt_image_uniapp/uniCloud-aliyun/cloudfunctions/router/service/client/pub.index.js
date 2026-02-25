@@ -34,13 +34,13 @@ const cloudObject = {
       code: 0,
       msg: ''
     }
-    let x = await vk.baseDao.add({
+    res.data = await vk.baseDao.add({
       dbName: 'images',
       dataJson: {
         url: data.url
       }
     })
-    return x
+    return res
   },
 
   //删除图片

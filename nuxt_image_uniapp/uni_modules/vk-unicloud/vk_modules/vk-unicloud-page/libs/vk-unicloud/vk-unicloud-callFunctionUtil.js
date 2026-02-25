@@ -1164,6 +1164,7 @@ class CallFunctionUtil {
 		} else if (["avi", "mp3", "mp4", "3gp", "mov", "rmvb", "rm", "flv", "mkv"].indexOf(suffix) > -1) {
 			fileType = "video";
 		}
+		console.log("fileType==> ", fileType);
 		return fileType;
 	}
 

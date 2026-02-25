@@ -3,7 +3,7 @@
     <MasonryWall :items="items" :column-width="280" :gap="6" :ssr-columns="1">
       <template #default="x">
         <div v-if="x.index == 0" class="absolute inset-0 z-40 bg-gray-700">
-          <UserInforMation :user="user"></UserInforMation>
+          <UserInforMation :user="user" :count="count"></UserInforMation>
         </div>
         <motion.div
           :initial="{ opacity: 0, y: 500 }"
@@ -33,8 +33,8 @@
             <div
               class="group-hover:opacity-100 group-hover:translate-y-0 absolute inset-x-0 bottom-0 z-20 p-3 text-white transition-all duration-300 translate-y-2 opacity-0"
             >
-              <div class="text-sm font-semibold">8888</div>
-              <!-- <div class="text-xs">{{ x?.item?.date }}</div> -->
+              <!-- <div class="text-sm font-semibold">{{ x?.item?._add_time_str }}</div> -->
+              <div class="text-xs">{{ x?.item?._add_time_str }}</div>
             </div>
           </div>
         </motion.div>
@@ -49,12 +49,17 @@
 
   const toast = useToast()
   const items = ref([])
+  const count = ref(0)
 
   // 存储图片尺寸缓存
   const imageCache = reactive(new Map())
 
   const x = await $fetch(`${useRuntimeConfig().public.apiBase}/pub.index.getImages`, {
-    method: 'GET'
+    method: 'GET',
+    data: {
+      page: 1,
+      size: 150
+    }
   })
 
   const xx = await $fetch(`${useRuntimeConfig().public.apiBase}/pub.index.getCount`, {
@@ -62,6 +67,8 @@
   })
 
   items.value = x.data
+  count.value = xx.data
+
   console.log('🚀 ~ :56 ~ items.value:', items.value)
 
   // 获取图片宽高比，优先使用缓存
