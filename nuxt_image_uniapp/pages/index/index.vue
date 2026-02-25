@@ -67,6 +67,7 @@
         </view>
       </template>
       <view class="flex flex-col p-3">
+        <view class="text-lg font-semibold text-white">图片上传</view>
         <view class="grid grid-cols-3 gap-3">
           <view
             class="aspect-square relative overflow-hidden bg-[#2d2d2d] rounded-lg"
