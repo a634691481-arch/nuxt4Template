@@ -148,37 +148,33 @@
     // 串行上传，等前一个完成再执行下一个
     for (let i = 0; i < filesToUpload.length; i++) {
       const file = filesToUpload[i]
-      try {
-        // 上传文件
-        const uploadRes = await new Promise((resolve, reject) => {
-          vk.uploadFile({
-            title: `上传中(${i + 1}/${filesToUpload.length})...`,
-            file: file,
-            success: resolve,
-            fail: reject
-          })
-        })
 
-        // 调用云函数保存到数据库
-        await vk.callFunction({
-          url: 'client/pub.index.addImage',
-          title: '',
-          data: {
-            url: uploadRes.url
-          }
+      // 上传文件
+      const uploadRes = await new Promise((resolve, reject) => {
+        vk.uploadFile({
+          title: `上传中(${i + 1}/${filesToUpload.length})...`,
+          file: file,
+          success: resolve,
+          fail: reject
         })
+      })
 
-        // 上传成功后，从显示列表中删除当前图片
-        const currentIndex = state.value.data.findIndex(item => item === file)
-        if (currentIndex !== -1) {
-          state.value.data.splice(currentIndex, 1)
+      // 调用云函数保存到数据库
+      await vk.callFunction({
+        url: 'client/pub.index.addImage',
+        title: '',
+        data: {
+          url: uploadRes.url
         }
+      })
 
-        console.log(`第${i + 1}张图片上传成功`)
-      } catch (err) {
-        console.error('上传失败:', err)
-        // 上传失败的图片保留在列表中
+      // 上传成功后，从显示列表中删除当前图片
+      const currentIndex = state.value.data.findIndex(item => item === file)
+      if (currentIndex !== -1) {
+        state.value.data.splice(currentIndex, 1)
       }
+
+      console.log(`第${i + 1}张图片上传成功`)
     }
 
     // 上传完成提示
