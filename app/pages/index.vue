@@ -7,14 +7,14 @@
         </div>
         <!-- :whileInView="{ opacity: 1, y: 0 }" -->
         <!-- :exit="{ opacity: 0, y: 22 }" -->
+        <!-- :initial="{ opacity: 0, y: 22 }" -->
+        <!-- :animate="{ opacity: 1, y: 0 }" -->
+        <!-- :transition="{ delay: x.index * 0.03, duration: 0.5 }" -->
         <!--  -->
         <motion.div
-          :initial="{ opacity: 0, y: 22 }"
-          :animate="{ opacity: 1, y: 0 }"
-          :transition="{
-            delay: x.index * 0.03,
-            duration: 0.5
-          }"
+          :initial="{ opacity: 0, scale: 1.08 }"
+          :animate="{ opacity: 1, scale: 1 }"
+          :transition="{ duration: 0.6, delay: 0.1 }"
           class="overflow-hidden"
         >
           <div
@@ -25,6 +25,7 @@
             <!--        :src="x.item.url || ''" -->
             <img
               v-if="!x.item.type || x.item.type === 'image'"
+              :src="x.item.url || ''"
               alt="图片"
               class="group-hover:scale-105 z-0 object-cover w-full h-full transition-transform duration-300 cursor-pointer"
               loading="lazy"
