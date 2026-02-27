@@ -1,6 +1,6 @@
 {
-  "date": "2026-02-25T09:07:26.619Z",
-  "preset": "vercel",
+  "date": "2026-02-27T07:34:00.959Z",
+  "preset": "nitro-prerender",
   "framework": {
     "name": "nuxt",
     "version": "4.2.1"
@@ -9,8 +9,7 @@
     "nitro": "2.12.8"
   },
   "commands": {
-    "preview": "",
-    "deploy": "npx vercel deploy --prebuilt"
+    "preview": "npx serve ./static"
   },
   "config": {}
 }
