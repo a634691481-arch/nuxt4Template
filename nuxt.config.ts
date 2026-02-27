@@ -5,6 +5,12 @@ export default defineNuxtConfig({
   devtools: {
     enabled: true
   },
+
+  devServer: {
+    port: 8888,
+    host: '0.0.0.0' //允外部访问
+  },
+
   runtimeConfig: {
     // 仅服务端可用的私有键
     name: 'yangliu',
